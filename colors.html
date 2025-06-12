@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Color Changer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1 id="text">I change colors :) </h1>
+
+  <button onclick="toggleColor()">Toggle Red/Black</button>
+  <button onclick="randomColor()">Random Color</button>
+
+  <br><br>
+
+  <input type="text" id="colorInput" placeholder="Enter a color">
+  <button onclick="setCustomColor()">Set Custom Color</button>
+
+  <p id="error" style="color: red;"></p>
+
+  <script>
+    let isRed = false;
+
+    function toggleColor() {
+      const text = document.getElementById("text");
+      text.style.color = isRed ? "black" : "red";
+      isRed = !isRed;
+      clearError();
+    }
+
+    function randomColor() {
+      const text = document.getElementById("text");
+      const random = '#' + Math.floor(Math.random()*16777215).toString(16);
+      text.style.color = random;
+      clearError();
+    }
+
+    function setCustomColor() {
+      const input = document.getElementById("colorInput").value;
+      const text = document.getElementById("text");
+      if (isValidColor(input)) {
+        text.style.color = input;
+        clearError();
+      } else {
+        document.getElementById("error").textContent = "Invalid color!";
+      }
+    }
+
+    function isValidColor(str) {
+      const s = new Option().style;
+      s.color = str;
+      return s.color !== '';
+    }
+
+    function clearError() {
+      document.getElementById("error").textContent = '';
+    }
+  </script>
+
+</body>
+</html>

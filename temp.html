@@ -1,0 +1,81 @@
+<!DOCTYPE html> <!-- Declares the document as an HTML5 document -->
+<html lang="en"> <!-- Root HTML element, with English as the language -->
+<head>
+  <meta charset="UTF-8"> <!-- Sets character encoding to UTF-8 -->
+  <title>Temperature Converter</title> <!-- Sets the title shown in the browser tab -->
+
+  <style>
+    /* Style for the entire page */
+    body {
+      font-family: Arial, sans-serif; /* Sets the font */
+      padding: 2rem; /* Adds space inside the page */
+      background: #f8f9fa; /* Light background color */
+    }
+
+    /* Container for the converter section */
+    .converter {
+      max-width: 400px; /* Limits width for readability */
+      margin: auto; /* Centers the container horizontally */
+    }
+
+    /* Each input group (label + input) */
+    .input-group {
+      margin-bottom: 1rem; /* Adds space between input sections */
+    }
+
+    /* Style for each label */
+    label {
+      display: block; /* Makes label take full width */
+      font-weight: bold; /* Makes label text bold */
+      margin-bottom: 0.3rem; /* Adds space between label and input */
+    }
+
+    /* Style for all input fields */
+    input {
+      width: 100%; /* Makes inputs span full width of container */
+      padding: 0.5rem; /* Adds padding inside input boxes */
+      font-size: 1rem; /* Increases font size for readability */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main converter UI -->
+  <div class="converter">
+    <h2>Temperature Converter</h2> <!-- Heading for the converter -->
+
+    <!-- Celsius input -->
+    <div class="input-group">
+      <label for="celsius">Celsius (°C)</label> <!-- Label for Celsius -->
+      <input type="number" id="celsius" oninput="convertTemp('celsius')"> <!-- Input for Celsius, triggers conversion -->
+    </div>
+
+    <!-- Fahrenheit input -->
+    <div class="input-group">
+      <label for="fahrenheit">Fahrenheit (°F)</label> <!-- Label for Fahrenheit -->
+      <input type="number" id="fahrenheit" oninput="convertTemp('fahrenheit')"> <!-- Input for Fahrenheit, triggers conversion -->
+    </div>
+
+    <!-- Kelvin input -->
+    <div class="input-group">
+      <label for="kelvin">Kelvin (K)</label> <!-- Label for Kelvin -->
+      <input type="number" id="kelvin" oninput="convertTemp('kelvin')"> <!-- Input for Kelvin, triggers conversion -->
+    </div>
+  </div>
+
+  <script>
+    // Main conversion function, triggered when a user types in one of the fields
+    function convertTemp(source) {
+      let celsius, fahrenheit, kelvin; // Declare variables to hold values
+
+      // Get references to each input field
+      const cInput = document.getElementById("celsius");
+      const fInput = document.getElementById("fahrenheit");
+      const kInput = document.getElementById("kelvin");
+
+      // If Celsius was typed in
+      if (source === "celsius") {
+        celsius = parseFloat(cInput.value); // Get Celsius value from input
+        if (!isNaN(celsius)) { // Make sure it's a number
+          fahrenheit = (celsius * 9/5) + 32; // Convert to Fahrenheit
+          kelvin = celsius
