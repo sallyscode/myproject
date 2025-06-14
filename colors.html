@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div style="text-align: center;">
   <h1 id="text">I change colors :) </h1>
 
   <button onclick="toggleColor()">Toggle Red/Black</button>
@@ -21,16 +21,19 @@
   <script>
     let isRed = false;
 
+    // Function toggles text between red and black
     function toggleColor() {
       const text = document.getElementById("text");
-      text.style.color = isRed ? "black" : "red";
-      isRed = !isRed;
+      text.style.color = isRed ? "black" : "red"; // If isRed true, make black
+      isRed = !isRed; // set it to the opposite of what it currently is; ! means NOT
       clearError();
     }
 
     function randomColor() {
       const text = document.getElementById("text");
+      // Generate a random number between 0 and 16777215 (which is FFFFFF in hex)
       const random = '#' + Math.floor(Math.random()*16777215).toString(16);
+        // Converts the number to a hexadecimal string, then add '#' to make it a valid color code
       text.style.color = random;
       clearError();
     }
@@ -42,7 +45,7 @@
         text.style.color = input;
         clearError();
       } else {
-        document.getElementById("error").textContent = "Invalid color!";
+        document.getElementById("error").textContent = "Invalid color! Try again";
       }
     }
 
@@ -56,6 +59,7 @@
       document.getElementById("error").textContent = '';
     }
   </script>
+  </div>
 
 </body>
 </html>
