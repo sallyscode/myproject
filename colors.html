@@ -17,7 +17,9 @@
   <button onclick="setCustomColor()">Set Custom Color</button>
 
   <p id="error" style="color: red;"></p>
-
+<!-- GIF initially hidden and centered -->
+    <img id="errorImage" src="" alt="Error GIF" style="display: none; width: 200px; margin: 20px auto;">
+</div>
   <script>
     let isRed = false;
 
@@ -45,7 +47,13 @@
         text.style.color = input;
         clearError();
       } else {
-        document.getElementById("error").textContent = "Invalid color! Try again";
+        document.getElementById("error").textContent = "Try again";
+         // Show hidden GIF
+        const errorImage = document.getElementById("errorImage");
+
+        errorImage.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
+
+        errorImage.style.display = "block";
       }
     }
 
