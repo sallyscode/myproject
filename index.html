@@ -1,73 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Color Changer</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+  .hidden {
+    visibility: hidden;
+  }
+  </style>
 </head>
 <body>
-<div style="text-align: center;">
-  <h1 id="text">I change colors :) </h1>
+  <div style="text-align: center;">
+    <h1 id="text">I change colors :)</h1>
 
-  <button onclick="toggleColor()">Toggle Red/Black</button>
-  <button onclick="randomColor()">Random Color</button>
+    <button onclick="toggleColor()">Toggle Red/Black</button>
+    <button onclick="randomColor()">Random Color</button>
 
-  <br><br>
+    <br /><br />
 
-  <input type="text" id="colorInput" placeholder="Enter a color">
-  <button onclick="setCustomColor()">Set Custom Color</button>
+    <input type="text" id="colorInput" placeholder="Enter a color" />
+    <button onclick="setCustomColor()">Set Custom Color</button>
 
-  <p id="error" style="color: red;"></p>
-<!-- GIF initially hidden and centered -->
-    <img id="errorImage" src="" alt="Error GIF" style="display: none; width: 200px; margin: 20px auto;">
-</div>
+    <p id="error" style="color: red;"></p>
+
+    <!-- GIF initially hidden and centered -->
+    <img
+      id="errorImage"
+      src=""
+      alt="Error GIF"
+      style="display: none; width: 200px; margin: 20px auto"
+    />
+  </div>
+
   <script>
     let isRed = false;
 
-    // Function toggles text between red and black
-    function toggleColor() {
+function toggleColor() {
       const text = document.getElementById("text");
-      text.style.color = isRed ? "black" : "red"; // If isRed true, make black
-      isRed = !isRed; // set it to the opposite of what it currently is; ! means NOT
+      text.style.color = isRed ? "black" : "red";
+      isRed = !isRed;
       clearError();
     }
 
     function randomColor() {
       const text = document.getElementById("text");
-      // Generate a random number between 0 and 16777215 (which is FFFFFF in hex)
-      const random = '#' + Math.floor(Math.random()*16777215).toString(16);
-        // Converts the number to a hexadecimal string, then add '#' to make it a valid color code
+      const random = "#" + Math.floor(Math.random() * 16777215).toString(16);
       text.style.color = random;
       clearError();
     }
 
-    function setCustomColor() {
-      const input = document.getElementById("colorInput").value;
+function setCustomColor() {
+      const input = document.getElementById("colorInput").value.trim();
       const text = document.getElementById("text");
+
       if (isValidColor(input)) {
         text.style.color = input;
         clearError();
       } else {
-        document.getElementById("error").textContent = "Try again";
-         // Show hidden GIF
+        document.getElementById("error").textContent = "Invalid color! Try again";
+
         const errorImage = document.getElementById("errorImage");
-
-        errorImage.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
-
-        errorImage.style.display = "block";
+        errorImage.src =
+          "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
+        errorImage.classList.remove("hidden"); //show GIF
       }
     }
 
-    function isValidColor(str) {
-      const s = new Option().style;
-      s.color = str;
-      return s.color !== '';
-    }
+function clearError() {
+  document.getElementById("error").textContent = "";
 
-    function clearError() {
-      document.getElementById("error").textContent = '';
-    }
+  const errorImage = document.getElementById("errorImage");
+
+  errorImage.classList.add("hidden"); // hide
+  errorImage.src = ""; // clear src
+
   </script>
-  </div>
-
 </body>
 </html>
