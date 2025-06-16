@@ -28,7 +28,8 @@
       id="errorImage"
       src=""
       alt="Error GIF"
-      style="display: none; width: 200px; margin: 20px auto"
+      class="hidden"
+      style="width: 200px; margin: 20px auto"
     />
   </div>
 
@@ -42,7 +43,7 @@ function toggleColor() {
       clearError();
     }
 
-    function randomColor() {
+function randomColor() {
       const text = document.getElementById("text");
       const random = "#" + Math.floor(Math.random() * 16777215).toString(16);
       text.style.color = random;
@@ -64,6 +65,12 @@ function setCustomColor() {
           "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
         errorImage.classList.remove("hidden"); //show GIF
       }
+    }
+
+function isValidColor(str) {
+      const s = new Option().style;
+      s.color = str;
+      return s.color !== '';
     }
 
 function clearError() {
