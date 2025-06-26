@@ -1,56 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Color Changer</title>
-  <style>
-  .hidden {
-    visibility: hidden;
-  }
-  </style>
+<meta charset="UTF-8" />
+<title>Folder Style</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div style="text-align: center;">
-    <h1 id="text">I change colors :)</h1>
 
-    <button onclick="toggleColor()">Toggle Red/Black</button>
-    <button onclick="randomColor()">Random Color</button>
+  <div class="folder">
+    <div class="gif-container">
+    <div class="folder-tab">Color Project</div>
+    <div class="content">
+      <h1 id="text">I change colors :)</h1>
 
-    <br /><br />
+      <button onclick="toggleColor()">Toggle Red/Black</button>
+      <button onclick="randomColor()">Random Color</button>
 
-    <input type="text" id="colorInput" placeholder="Enter a color" />
-    <button onclick="setCustomColor()">Set Custom Color</button>
+      <br /><br />
 
-    <p id="error" style="color: red;"></p>
+      <input type="text" id="colorInput" placeholder="Enter a color" />
+      <button onclick="setCustomColor()">Set Custom Color</button>
 
-    <!-- GIF initially hidden and centered -->
-    <img
-      id="errorImage"
-      src=""
-      alt="Error GIF"
-      class="hidden"
-      style="width: 200px; margin: 20px auto"
-    />
+      <p id="error" style="color: red;"></p>
+
+      <img id="errorImage" src="" alt="Error GIF" />
+    </div>
+  </div>
   </div>
 
   <script>
     let isRed = false;
 
-function toggleColor() {
+    function toggleColor() {
       const text = document.getElementById("text");
       text.style.color = isRed ? "black" : "red";
       isRed = !isRed;
       clearError();
     }
 
-function randomColor() {
+    function randomColor() {
       const text = document.getElementById("text");
       const random = "#" + Math.floor(Math.random() * 16777215).toString(16);
       text.style.color = random;
       clearError();
     }
 
-function setCustomColor() {
+    function setCustomColor() {
       const input = document.getElementById("colorInput").value.trim();
       const text = document.getElementById("text");
 
@@ -59,28 +54,25 @@ function setCustomColor() {
         clearError();
       } else {
         document.getElementById("error").textContent = "Invalid color! Try again";
-
         const errorImage = document.getElementById("errorImage");
-        errorImage.src =
-          "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
-        errorImage.classList.remove("hidden"); //show GIF
+        errorImage.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
+        errorImage.style.display = "block";
       }
     }
 
-function isValidColor(str) {
+    function isValidColor(str) {
       const s = new Option().style;
       s.color = str;
-      return s.color !== '';
+      return s.color !== "";
     }
 
-function clearError() {
-  document.getElementById("error").textContent = "";
-
-  const errorImage = document.getElementById("errorImage");
-
-  errorImage.classList.add("hidden"); // hide
-  errorImage.src = ""; // clear src
-
+    function clearError() {
+      document.getElementById("error").textContent = "";
+      const errorImage = document.getElementById("errorImage");
+      errorImage.style.display = "none";
+      errorImage.src = "";
+    }
   </script>
+
 </body>
 </html>
