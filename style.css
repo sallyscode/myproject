@@ -1,36 +1,82 @@
-.folder {
+/* CONTAINER FOR THE FOLDER & TABS */
+.folder-with-tabs {
   width: 700px;
-  height: 450px;
-  background: #f7f1e1;
-  border: 4px solid #bb9e5d;
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-
-  position: relative; /* so tab can be positioned relative to this */
-  margin: 130px auto; /* more top space to account for tab */
-  padding: 40px 30px 30px 30px; /* space inside folder */
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* allow content to stack from top */
-  overflow: visible; /* optional: ensures no unexpected overflow */
+  margin: 50px auto; /* center on page */
 }
 
-.folder-tab {
-  position: absolute;
-  top: -30px;
-  left: 20px;
-  width: 160px;
-  height: 40px;
-
-  background: #bb9e5d;
-  border: 4px solid #bb9e5d;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+/* TABS ON TOP */
+.tabs-container {
   display: flex;
-  justify-content: center;
+}
 
+/* INDIVIDUAL TABS */
+.folder-tab {
+  border: 4px solid transparent;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.05);
+  padding: 10px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, border 0.3s;
+}
+
+/* EACH TAB WITH OWN COLOR */
+.folder-tab:nth-child(1) {
+  background: #E8DAEF;
+  border-color: #E8DAEF;
+}
+.folder-tab:nth-child(2) {
+  background: #D5F5E3;
+  border-color: #D5F5E3;
+}
+.folder-tab:nth-child(3) {
+  background: #FCF3CF;
+  border-color: #FCF3CF;
+}
+
+/* ACTIVE TABS LOOK LIKE THEY MERGE WITH FOLDER */
+.folder-tab.active:nth-child(1) {
+  background: #E8DAEF;
+  border-color: #E8DAEF;
+}
+.folder-tab.active:nth-child(2) {
+  background: #D5F5E3;
+  border-color: #D5F5E3;
+}
+.folder-tab.active:nth-child(3) {
+  background: #FCF3CF;
+  border-color: #FCF3CF;
+}
+
+/* HOVER: LIGHT BRIGHTENING */
+.folder-tab:hover {
+  filter: brightness(1.05);
+}
+
+/* FOLDER BOX BELOW THE TABS */
+.folder {
+  border: 4px solid transparent;
+  border-top: none; /* connects visually to tabs */
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px 30px 30px;
+  box-sizing: border-box;
+  transition: background 0.3s, border 0.3s;
+}
+
+/* FOLDER BACKGROUNDS MATCHING EACH TAB */
+.folder-lavender {
+  background: #E8DAEF;
+  border-color: #E8DAEF;
+}
+.folder-green {
+  background: #D5F5E3;
+  border-color: #D5F5E3;
+}
+.folder-yellow {
+  background: #FCF3CF;
+  border-color: #FCF3CF;
 }

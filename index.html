@@ -1,78 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Folder Style</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <title>My Projects Folder</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="folder">
-    <div class="gif-container">
-    <div class="folder-tab">Color Project</div>
-    <div class="content">
-      <h1 id="text">I change colors :)</h1>
+  <!-- Main container holding tabs and folder -->
+  <div class="folder-with-tabs">
 
-      <button onclick="toggleColor()">Toggle Red/Black</button>
-      <button onclick="randomColor()">Random Color</button>
+    <!-- Tabs at the top -->
+    <div class="tabs-container">
+      <div class="folder-tab active" onclick="showTab('color', this)">Color Changer</div>
+      <div class="folder-tab" onclick="showTab('convert', this)">Unit Converter</div>
+      <div class="folder-tab" onclick="showTab('guess', this)">Number Guessing</div>
+    </div>
 
-      <br /><br />
+    <!-- Single folder area: content changes by tab -->
+    <div class="folder">
 
-      <input type="text" id="colorInput" placeholder="Enter a color" />
-      <button onclick="setCustomColor()">Set Custom Color</button>
+      <!-- COLOR CHANGER PROJECT -->
+      <div class="tab-content" id="color">
+        <h1 id="colorText">This text changes color</h1>
+        <button onclick="toggleColor()">Toggle Black/Red</button>
+        <button onclick="randomTextColor()">Random Color</button>
+        <br><br>
+        <input type="text" id="colorInput" placeholder="Enter a color">
+        <button onclick="setTextColor()">Set Color</button>
+        <p id="colorError" style="color:red;"></p>
+        <img id="colorErrorImage" src="" alt="Error GIF" style="display:none; width:200px; margin-top:10px;">
+      </div>
 
-      <p id="error" style="color: red;"></p>
+      <!-- UNIT CONVERTER PROJECT -->
+      <div class="tab-content" id="convert" style="display:none;">
+        <h2>Unit Converter</h2>
+        <select id="conversionType" onchange="updateUnitLabels()">
+          <option value="ftoc">Fahrenheit to Celsius</option>
+          <option value="ctof">Celsius to Fahrenheit</option>
+          <option value="kgtolbs">KG to LBS</option>
+          <option value="mtoft">Meters to Feet</option>
+        </select>
+        <br><br>
+        <input type="number" id="inputValue" placeholder="Enter value">
+        <button onclick="convert()">Convert</button>
+        <p id="conversionResult"></p>
+      </div>
 
-      <img id="errorImage" src="" alt="Error GIF" />
+      <!-- NUMBER GUESSING GAME -->
+      <div class="tab-content" id="guess" style="display:none;">
+        <h2>Guess the number (0-10)</h2>
+        <input type="number" id="guessInput" min="0" max="10">
+        <button onclick="makeGuess()">Guess</button>
+        <p id="guessFeedback"></p>
+      </div>
+
     </div>
   </div>
-  </div>
 
-  <script>
-    let isRed = false;
-
-    function toggleColor() {
-      const text = document.getElementById("text");
-      text.style.color = isRed ? "black" : "red";
-      isRed = !isRed;
-      clearError();
-    }
-
-    function randomColor() {
-      const text = document.getElementById("text");
-      const random = "#" + Math.floor(Math.random() * 16777215).toString(16);
-      text.style.color = random;
-      clearError();
-    }
-
-    function setCustomColor() {
-      const input = document.getElementById("colorInput").value.trim();
-      const text = document.getElementById("text");
-
-      if (isValidColor(input)) {
-        text.style.color = input;
-        clearError();
-      } else {
-        document.getElementById("error").textContent = "Invalid color! Try again";
-        const errorImage = document.getElementById("errorImage");
-        errorImage.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
-        errorImage.style.display = "block";
-      }
-    }
-
-    function isValidColor(str) {
-      const s = new Option().style;
-      s.color = str;
-      return s.color !== "";
-    }
-
-    function clearError() {
-      document.getElementById("error").textContent = "";
-      const errorImage = document.getElementById("errorImage");
-      errorImage.style.display = "none";
-      errorImage.src = "";
-    }
-  </script>
+  <!-- Link to separate JavaScript file -->
+  <script src="script.js"></script>
 
 </body>
 </html>
