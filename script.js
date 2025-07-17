@@ -4,7 +4,8 @@
 function showTab(tabName, element) {
   // Hide all tab content
   document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-  // Show selected content
+
+  // Show selected tab content
   document.getElementById(tabName).style.display = 'block';
 
   // Update active tab style
@@ -13,13 +14,27 @@ function showTab(tabName, element) {
 
   // Change folder background to match selected tab
   const folder = document.querySelector('.folder');
-  folder.classList.remove('folder-lavender', 'folder-green', 'folder-yellow');
+  folder.classList.remove(
+    'folder-lavender',
+    'folder-green',
+    'folder-yellow',
+    'folder-pink',
+    'folder-blue',
+    'folder-mint'
+  );
+
   if (tabName === 'color') {
     folder.classList.add('folder-lavender');
   } else if (tabName === 'convert') {
     folder.classList.add('folder-green');
   } else if (tabName === 'guess') {
     folder.classList.add('folder-yellow');
+  } else if (tabName === 'rps') {
+    folder.classList.add('folder-pink');
+  } else if (tabName === 'quote') {
+    folder.classList.add('folder-blue');
+  } else if (tabName === 'todo') {
+    folder.classList.add('folder-mint');
   }
 }
 
@@ -27,6 +42,7 @@ function showTab(tabName, element) {
    COLOR CHANGER
    ============ */
 let isBlack = true;
+
 function toggleColor() {
   const text = document.getElementById("colorText");
   text.style.color = isBlack ? "red" : "black";
@@ -47,7 +63,7 @@ function setTextColor() {
     text.style.color = color;
     clearColorError();
   } else {
-    document.getElementById("colorError").textContent = "Invalid color!";
+    document.getElementById("colorError").textContent = "Try it again!";
     const errorImage = document.getElementById("colorErrorImage");
     errorImage.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzZndnA3YXg5cXIyNXl5ZnFjamptY3piYmE0NXE1NWYzOTc2YW9qYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MXywxyJ5UyvtgoF94a/giphy.gif";
     errorImage.style.display = "block";
@@ -78,6 +94,7 @@ function convert() {
   const type = document.getElementById("conversionType").value;
   const value = parseFloat(document.getElementById("inputValue").value);
   let result = "";
+
   if (isNaN(value)) {
     result = "Please enter a valid number.";
   } else {
@@ -96,6 +113,7 @@ function convert() {
         break;
     }
   }
+
   document.getElementById("conversionResult").textContent = result;
 }
 
@@ -108,15 +126,16 @@ let guessesLeft = 3;
 function makeGuess() {
   const guess = parseInt(document.getElementById("guessInput").value);
   const feedback = document.getElementById("guessFeedback");
+
   if (guess === secretNumber) {
-    feedback.textContent = `🎉 You guessed it! The number was ${secretNumber}. Starting new game.`;
+    feedback.textContent = `🎉 Yay you did it! The number was ${secretNumber}. New game.`;
     resetGuessGame();
   } else {
     guessesLeft--;
     if (guessesLeft > 0) {
       feedback.textContent = `Wrong guess. ${guessesLeft} guesses left.`;
     } else {
-      feedback.textContent = `😞 Out of guesses! The number was ${secretNumber}. Starting new game.`;
+      feedback.textContent = `Strike out! The number was ${secretNumber}. New game.`;
       resetGuessGame();
     }
   }
@@ -125,4 +144,62 @@ function makeGuess() {
 function resetGuessGame() {
   secretNumber = Math.floor(Math.random() * 11);
   guessesLeft = 3;
+}
+
+/* ===========
+   ROCK PAPER SCISSORS
+   ============ */
+function playRPS(playerChoice) {
+  const choices = ["rock", "paper", "scissors"];
+  const computerChoice = choices[Math.floor(Math.random() * 3)];
+  let result = "";
+
+  if (playerChoice === computerChoice) {
+    result = "It's a tie!";
+  } else if (
+    (playerChoice === "rock" && computerChoice === "scissors") ||
+    (playerChoice === "paper" && computerChoice === "rock") ||
+    (playerChoice === "scissors" && computerChoice === "paper")
+  ) {
+    result = `You win! Mickey chose ${computerChoice}.`;
+  } else {
+    result = `You lose! Mickey chose ${computerChoice}.`;
+  }
+
+  document.getElementById("rpsResult").textContent = result;
+}
+
+/* ===========
+   QUOTE OF THE DAY
+   ============ */
+async function getQuote() {
+  try {
+    const response = await fetch("https://zenquotes.io/api/random");
+    const data = await response.json();
+    const quote = `${data[0].q} — ${data[0].a}`;
+    document.getElementById("quoteText").textContent = quote;
+  } catch (err) {
+    document.getElementById("quoteText").textContent = "Failed to fetch quote.";
+  }
+}
+
+/* ===========
+   TODO LIST
+   ============ */
+function addTodo() {
+  const input = document.getElementById("todoInput");
+  const task = input.value.trim();
+  if (!task) return;
+
+  const li = document.createElement("li");
+  li.textContent = task;
+
+  const doneBtn = document.createElement("button");
+  doneBtn.textContent = "✓";
+  doneBtn.style.marginLeft = "10px";
+  doneBtn.onclick = () => li.style.textDecoration = "line-through";
+
+  li.appendChild(doneBtn);
+  document.getElementById("todoList").appendChild(li);
+  input.value = "";
 }

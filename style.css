@@ -23,32 +23,56 @@
   transition: background 0.3s, border 0.3s;
 }
 
-/* EACH TAB WITH OWN COLOR */
-.folder-tab:nth-child(1) {
+/* EACH TAB WITH OWN COLOR (by class) */
+.tab-color {
   background: #E8DAEF;
   border-color: #E8DAEF;
 }
-.folder-tab:nth-child(2) {
+.tab-convert {
   background: #D5F5E3;
   border-color: #D5F5E3;
 }
-.folder-tab:nth-child(3) {
+.tab-guess {
   background: #FCF3CF;
   border-color: #FCF3CF;
+}
+.tab-rps {
+  background: #FADBD8; /* soft pink */
+  border-color: #FADBD8;
+}
+.tab-quote {
+  background: #D6EAF8; /* soft blue */
+  border-color: #D6EAF8;
+}
+.tab-todo {
+  background: #E8F8F5; /* mint */
+  border-color: #E8F8F5;
 }
 
 /* ACTIVE TABS LOOK LIKE THEY MERGE WITH FOLDER */
-.folder-tab.active:nth-child(1) {
+.folder-tab.active.tab-color {
   background: #E8DAEF;
   border-color: #E8DAEF;
 }
-.folder-tab.active:nth-child(2) {
+.folder-tab.active.tab-convert {
   background: #D5F5E3;
   border-color: #D5F5E3;
 }
-.folder-tab.active:nth-child(3) {
+.folder-tab.active.tab-guess {
   background: #FCF3CF;
   border-color: #FCF3CF;
+}
+.folder-tab.active.tab-rps {
+  background: #FADBD8;
+  border-color: #FADBD8;
+}
+.folder-tab.active.tab-quote {
+  background: #D6EAF8;
+  border-color: #D6EAF8;
+}
+.folder-tab.active.tab-todo {
+  background: #E8F8F5;
+  border-color: #E8F8F5;
 }
 
 /* HOVER: LIGHT BRIGHTENING */
@@ -58,16 +82,17 @@
 
 /* FOLDER BOX BELOW THE TABS */
 .folder {
-  border: 4px solid transparent;
+  border: 4px solid #E8DAEF; /* default lavender border for initial load */
   border-top: none; /* connects visually to tabs */
   border-radius: 0 0 10px 10px;
+  background: #E8DAEF; /* default lavender background */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   padding: 40px 30px 30px 30px;
   box-sizing: border-box;
   transition: background 0.3s, border 0.3s;
 }
 
-/* FOLDER BACKGROUNDS MATCHING EACH TAB */
+/* FOLDER BACKGROUNDS MATCHING EACH TAB (used by JS) */
 .folder-lavender {
   background: #E8DAEF;
   border-color: #E8DAEF;
@@ -79,4 +104,29 @@
 .folder-yellow {
   background: #FCF3CF;
   border-color: #FCF3CF;
+}
+.folder-pink {
+  background: #FADBD8;
+  border-color: #FADBD8;
+}
+.folder-blue {
+  background: #D6EAF8;
+  border-color: #D6EAF8;
+}
+.folder-mint {
+  background: #E8F8F5;
+  border-color: #E8F8F5;
+}
+
+/* ROCK PAPER SCISSORS ICON STYLING */
+.rps-icon {
+  width: 100px;
+  height: auto;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.rps-icon:hover {
+  transform: scale(1.1);
 }
